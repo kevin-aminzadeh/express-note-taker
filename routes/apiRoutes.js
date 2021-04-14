@@ -31,4 +31,16 @@ router.post("/notes", validate.validateNote, async (req, res) => {
   }
 });
 
+// Delete note
+router.delete("/notes/:id", async (req, res) => {
+  try {
+    notesService.deleteNote(parseInt(req.params.id));
+
+    // Force redirect to reflect changes in view
+    res.redirect("/notes");
+  } catch (err) {
+    throw err;
+  }
+});
+
 module.exports = router;
